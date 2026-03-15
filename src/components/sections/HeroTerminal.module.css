@@ -1,0 +1,126 @@
+.terminalWindow {
+    position: relative;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(63, 185, 80, 0.08);
+    position: relative;
+    z-index: 1;
+}
+
+.terminalBar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.red {
+    background: #ff5f57;
+}
+
+.yellow {
+    background: #febc2e;
+}
+
+.greenDot {
+    background: #28c840;
+}
+
+.terminalTitle {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    margin: 0 auto;
+}
+
+.terminalBody {
+    padding: 20px 20px 28px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.8;
+    min-height: 280px;
+}
+
+.tLine {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.tLine.show {
+    opacity: 1;
+    transform: none;
+}
+
+.prompt {
+    color: var(--green);
+    text-shadow: 0 0 8px rgba(63, 185, 80, 0.4);
+    white-space: nowrap;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.tCmd {
+    color: var(--text);
+}
+
+.tOutput {
+    color: var(--text2);
+}
+
+.tOutput.green {
+    color: var(--green);
+    text-shadow: 0 0 6px rgba(63, 185, 80, 0.3);
+}
+
+.tOutput.dim {
+    color: var(--text3);
+}
+
+.tBlank {
+    height: 8px;
+}
+
+.cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--green);
+    animation: blink 0.8s step-end infinite;
+    vertical-align: middle;
+    box-shadow: 0 0 6px rgba(63, 185, 80, 0.6);
+}
+
+@media (max-width: 600px) {
+    .terminalBody {
+        font-size: 12px;
+        padding: 14px 12px 20px;
+    }
+}
+
+.watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    opacity: 0.04;
+    filter: blur(3px);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}

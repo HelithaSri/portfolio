@@ -1,0 +1,85 @@
+.fadeSection {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.fadeSection.visible {
+    opacity: 1;
+    transform: none;
+}
+
+.skillGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 10px;
+}
+
+.skillCard {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.skillCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.skillCard:hover {
+    border-color: var(--green3);
+    box-shadow: 0 0 28px rgba(63, 185, 80, 0.1);
+    transform: translateY(-2px);
+}
+
+.skillCard:hover::before {
+    opacity: 1;
+}
+
+.skillCat {
+    font-size: 10px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    font-family: var(--mono);
+}
+
+.tagCloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    background: var(--bg3);
+    transition: all 0.2s;
+}
+
+.tag:hover {
+    border-color: var(--border2);
+    color: var(--text);
+}
+
+.tag.primary {
+    border-color: rgba(63, 185, 80, 0.3);
+    color: var(--green);
+    background: rgba(63, 185, 80, 0.06);
+}

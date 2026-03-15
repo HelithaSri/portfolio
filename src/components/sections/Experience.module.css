@@ -1,0 +1,133 @@
+.fadeSection {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.fadeSection.visible {
+    opacity: 1;
+    transform: none;
+}
+
+.expList {
+    position: relative;
+    padding-left: 24px;
+}
+
+.expLine {
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--green3), var(--border), transparent);
+}
+
+.expItem {
+    position: relative;
+    margin-bottom: 32px;
+}
+
+.expDot {
+    position: absolute;
+    left: -19px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--border2);
+    transition: all 0.3s;
+}
+
+.expDot.active {
+    border-color: var(--green);
+    background: #0f2e1a;
+    box-shadow: 0 0 10px rgba(63, 185, 80, 0.4);
+}
+
+.expItem:hover .expDot {
+    border-color: var(--green);
+    box-shadow: 0 0 8px rgba(63, 185, 80, 0.3);
+}
+
+.expCard {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.expCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.expItem:hover .expCard {
+    border-color: var(--green3);
+    box-shadow: 0 0 28px rgba(63, 185, 80, 0.1);
+    transform: translateY(-2px);
+}
+
+.expItem:hover .expCard::before {
+    opacity: 1;
+}
+
+.expHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 3px;
+}
+
+.expRole {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.expDate {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    white-space: nowrap;
+}
+
+.expCompany {
+    font-size: 12px;
+    color: var(--green);
+    margin-bottom: 10px;
+}
+
+.expBullets {
+    list-style: none;
+    padding: 0;
+}
+
+.expBullets li {
+    font-size: 12px;
+    color: var(--text2);
+    padding: 3px 0 3px 14px;
+    position: relative;
+    line-height: 1.6;
+}
+
+.expBullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-size: 10px;
+    top: 4px;
+}

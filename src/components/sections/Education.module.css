@@ -1,0 +1,133 @@
+.fadeSection {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.fadeSection.visible {
+    opacity: 1;
+    transform: none;
+}
+
+.eduList {
+    position: relative;
+    padding-left: 24px;
+}
+
+.eduLine {
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--green3), var(--border), transparent);
+}
+
+.eduItem {
+    position: relative;
+    margin-bottom: 32px;
+}
+
+.eduDot {
+    position: absolute;
+    left: -19px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--border2);
+    transition: all 0.3s;
+}
+
+.eduDot.recent {
+    border-color: var(--green);
+    background: #0f2e1a;
+    box-shadow: 0 0 10px rgba(63, 185, 80, 0.4);
+}
+
+.eduItem:hover .eduDot {
+    border-color: var(--green);
+    box-shadow: 0 0 8px rgba(63, 185, 80, 0.3);
+}
+
+.eduCard {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.eduCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.eduItem:hover .eduCard {
+    border-color: var(--green3);
+    box-shadow: 0 0 28px rgba(63, 185, 80, 0.1);
+    transform: translateY(-2px);
+}
+
+.eduItem:hover .eduCard::before {
+    opacity: 1;
+}
+
+.eduHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 3px;
+}
+
+.eduDegree {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.eduDate {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    white-space: nowrap;
+}
+
+.eduSchool {
+    font-size: 12px;
+    color: var(--green);
+    margin-bottom: 10px;
+}
+
+.eduMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.eduBadge {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    background: var(--bg3);
+}
+
+.eduBadge.grade {
+    border-color: rgba(63, 185, 80, 0.3);
+    color: var(--green);
+    background: rgba(63, 185, 80, 0.06);
+}
