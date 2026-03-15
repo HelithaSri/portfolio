@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helitha Praveen — Backend Software Engineer</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--bg2:#161b22;--bg3:#21262d;
+  --border:#30363d;--border2:#444c56;
+  --text:#e6edf3;--text2:#8b949e;--text3:#656d76;
+  --green:#3fb950;--green2:#238636;--green3:#1a7f37;
+  --glow:rgba(63,185,80,0.15);--glow2:rgba(63,185,80,0.06);
+  --blue:#58a6ff;
+  --mono:'Courier New',Courier,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(13,17,23,0.95);backdrop-filter:blur(12px);z-index:100;flex-wrap:wrap;gap:10px}
+.nav-logo{font-family:var(--mono);font-size:13px;color:var(--green);text-shadow:0 0 12px rgba(63,185,80,0.5)}
+.nav-links{display:flex;gap:2px;flex-wrap:wrap}
+.nav-link{padding:4px 10px;border-radius:6px;border:none;background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:var(--mono);transition:all .2s;text-decoration:none;display:inline-block}
+.nav-link:hover{color:var(--green);text-shadow:0 0 8px rgba(63,185,80,0.4)}
+.shell{max-width:860px;margin:0 auto;padding:0 24px 80px}
+.hero{padding:48px 0 16px}
+.terminal-window{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 0 40px rgba(63,185,80,0.08)}
+.terminal-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--bg3);border-bottom:1px solid var(--border)}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.terminal-title{font-family:var(--mono);font-size:11px;color:var(--text3);margin:0 auto}
+.terminal-body{padding:20px 20px 28px;font-family:var(--mono);font-size:13px;line-height:1.8;min-height:280px}
+.t-line{display:flex;align-items:flex-start;margin-bottom:2px;opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s}
+.t-line.show{opacity:1;transform:none}
+.prompt{color:var(--green);text-shadow:0 0 8px rgba(63,185,80,0.4);white-space:nowrap;margin-right:8px;flex-shrink:0}
+.t-cmd{color:var(--text)}
+.t-output{color:var(--text2)}
+.t-output.green{color:var(--green);text-shadow:0 0 6px rgba(63,185,80,0.3)}
+.t-output.dim{color:var(--text3)}
+.t-blank{height:8px}
+.cursor{display:inline-block;width:8px;height:14px;background:var(--green);animation:blink .8s step-end infinite;vertical-align:middle;box-shadow:0 0 6px rgba(63,185,80,0.6)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.gh-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:6px;font-size:12px;cursor:pointer;font-family:var(--mono);transition:all .2s;border:1px solid var(--border2);background:var(--bg2);color:var(--text);text-decoration:none}
+.gh-btn:hover{background:var(--bg3);border-color:var(--text3)}
+.gh-btn.primary{background:transparent;border:1px solid var(--green);color:var(--green);text-shadow:0 0 8px rgba(63,185,80,0.3);box-shadow:0 0 16px rgba(63,185,80,0.1)}
+.gh-btn.primary:hover{background:var(--glow);box-shadow:0 0 24px rgba(63,185,80,0.2)}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
+.stat{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center;transition:border-color .3s,box-shadow .3s}
+.stat:hover{border-color:var(--green3);box-shadow:0 0 16px var(--glow2)}
+.stat-num{font-family:var(--mono);font-size:22px;color:var(--green);font-weight:500;text-shadow:0 0 10px rgba(63,185,80,0.3)}
+.stat-label{font-size:11px;color:var(--text3);margin-top:2px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:52px 0 40px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.sec-num{font-family:var(--mono);font-size:11px;color:var(--green);text-shadow:0 0 8px rgba(63,185,80,0.4)}
+.sec-head h2{font-size:16px;font-weight:500}
+.sec-head .line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+.sec-head .count{font-family:var(--mono);font-size:11px;color:var(--text3);background:var(--bg2);border:1px solid var(--border);padding:1px 8px;border-radius:10px}
+.fade-section{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.fade-section.visible{opacity:1;transform:none}
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.skill-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:16px;transition:border-color .3s,box-shadow .3s}
+.skill-card:hover{border-color:var(--green3);box-shadow:0 0 20px var(--glow2)}
+.skill-cat{font-size:10px;color:var(--green);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;font-family:var(--mono)}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:4px;border:1px solid var(--border);color:var(--text2);background:var(--bg3);transition:all .2s}
+.tag:hover{border-color:var(--border2);color:var(--text)}
+.tag.primary{border-color:rgba(63,185,80,0.3);color:var(--green);background:rgba(63,185,80,0.06)}
+.exp-list,.edu-list{position:relative;padding-left:24px}
+.exp-line,.edu-line{position:absolute;left:8px;top:10px;bottom:10px;width:1px;background:linear-gradient(to bottom,var(--green3),var(--border),transparent)}
+.exp-item,.edu-item{position:relative;margin-bottom:32px}
+.exp-dot,.edu-dot{position:absolute;left:-19px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--border2);transition:all .3s}
+.exp-dot.active,.edu-dot.recent{border-color:var(--green);background:#0f2e1a;box-shadow:0 0 10px rgba(63,185,80,0.4)}
+.exp-item:hover .exp-dot,.edu-item:hover .edu-dot{border-color:var(--green);box-shadow:0 0 8px rgba(63,185,80,0.3)}
+.exp-card,.edu-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:16px;transition:border-color .3s,box-shadow .3s}
+.exp-item:hover .exp-card,.edu-item:hover .edu-card{border-color:var(--border2);box-shadow:0 0 24px rgba(63,185,80,0.06)}
+.exp-header,.edu-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:3px}
+.exp-role,.edu-degree{font-size:14px;font-weight:500}
+.exp-date,.edu-date{font-family:var(--mono);font-size:11px;color:var(--text3);white-space:nowrap}
+.exp-company,.edu-school{font-size:12px;color:var(--green);margin-bottom:10px}
+.exp-bullets{list-style:none;padding:0}
+.exp-bullets li{font-size:12px;color:var(--text2);padding:3px 0 3px 14px;position:relative;line-height:1.6}
+.exp-bullets li::before{content:"▸";position:absolute;left:0;color:var(--green);font-size:10px;top:4px}
+.edu-meta{display:flex;flex-wrap:wrap;gap:6px}
+.edu-badge{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:4px;border:1px solid var(--border);color:var(--text2);background:var(--bg3)}
+.edu-badge.grade{border-color:rgba(63,185,80,0.3);color:var(--green);background:rgba(63,185,80,0.06)}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.proj-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:18px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:0;transition:opacity .3s}
+.proj-card:hover{border-color:var(--green3);box-shadow:0 0 28px rgba(63,185,80,0.1);transform:translateY(-2px)}
+.proj-card:hover::before{opacity:1}
+.proj-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.proj-icon{width:32px;height:32px;border-radius:6px;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center}
+.proj-icon svg{width:15px;height:15px;fill:none;stroke:var(--green);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.proj-lang{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);font-family:var(--mono)}
+.proj-lang-dot{width:10px;height:10px;border-radius:50%;background:#f89820;flex-shrink:0}
+.proj-lang-dot.blue{background:#5382a1}
+.proj-name{font-size:13px;font-weight:500;margin-bottom:5px}
+.proj-desc{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:12px}
+.proj-tags{display:flex;flex-wrap:wrap;gap:4px}
+.proj-tag{font-size:10px;font-family:var(--mono);padding:2px 7px;border-radius:4px;border:1px solid var(--border);color:var(--text3)}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.contact-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;transition:all .25s;text-decoration:none;color:var(--text)}
+.contact-item:hover{border-color:var(--green3);box-shadow:0 0 16px var(--glow2);transform:translateY(-1px)}
+.contact-item-icon{width:36px;height:36px;border-radius:8px;background:rgba(63,185,80,0.08);border:1px solid rgba(63,185,80,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-item-icon svg{width:16px;height:16px;fill:none;stroke:var(--green);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.contact-item-icon.filled svg{fill:var(--green);stroke:none}
+.contact-item-label{font-size:10px;color:var(--text3);margin-bottom:2px;font-family:var(--mono)}
+.contact-item-val{font-size:12px;color:var(--text)}
+.footer{text-align:center;padding:32px 0 0;font-family:var(--mono);font-size:11px;color:var(--text3)}
+.footer span{color:var(--green)}
+.contact-intro{margin-bottom:28px}
+.contact-intro h3{font-size:22px;font-weight:500;color:var(--text);line-height:1.35;margin-bottom:12px}
+.contact-intro h3 span{color:var(--green);text-shadow:0 0 12px rgba(63,185,80,0.3)}
+.contact-intro p{font-size:13px;color:var(--text2);line-height:1.85;font-weight:300}
+@media(max-width:600px){
+  .contact-grid{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .terminal-body{font-size:12px;padding:14px 12px 20px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">~/helitha-praveen $</span>
+  <div class="nav-links">
+    <a class="nav-link" href="#about">about</a>
+    <a class="nav-link" href="#skills">skills</a>
+    <a class="nav-link" href="#experience">experience</a>
+    <a class="nav-link" href="#education">education</a>
+    <a class="nav-link" href="#projects">projects</a>
+    <a class="nav-link" href="#contact">contact</a>
+  </div>
+</nav>
+
+<div class="shell">
+
+<section id="about" class="hero">
+  <div class="terminal-window">
+    <div class="terminal-bar">
+      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <span class="terminal-title">helitha@portfolio ~ bash</span>
+    </div>
+    <div class="terminal-body" id="term"></div>
+  </div>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-num">3+</div><div class="stat-label">years experience</div></div>
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">devs mentored</div></div>
+    <div class="stat"><div class="stat-num" style="font-size:13px;padding-top:6px;line-height:1.4">Colombo<br>remote-ready</div><div class="stat-label">location</div></div>
+  </div>
+  <div class="hero-btns">
+    <a class="gh-btn primary" href="https://github.com/HelithaSri" target="_blank">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      github.com/HelithaSri
+    </a>
+    <a class="gh-btn" href="https://linkedin.com/in/helithasri" target="_blank">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a class="gh-btn" href="#" download>download_cv.pdf ↓</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills" class="fade-section">
+  <div class="sec-head"><span class="sec-num">01.</span><h2>Skills &amp; tech stack</h2><div class="line"></div><div class="count">18 technologies</div></div>
+  <div class="skill-grid">
+    <div class="skill-card">
+      <div class="skill-cat">Languages</div>
+      <div class="tag-cloud">
+        <span class="tag primary">Java</span><span class="tag primary">SQL</span><span class="tag">Python</span><span class="tag">Dart</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Frameworks</div>
+      <div class="tag-cloud">
+        <span class="tag primary">Spring Boot</span><span class="tag primary">Spring Security</span><span class="tag">Spring MVC</span><span class="tag">Hibernate/JPA</span><span class="tag">JUnit</span><span class="tag">Flutter</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Backend &amp; infra</div>
+      <div class="tag-cloud">
+        <span class="tag primary">REST APIs</span><span class="tag">SOAP</span><span class="tag primary">Microservices</span><span class="tag">Nginx</span><span class="tag">Docker</span><span class="tag">Linux</span><span class="tag">CI/CD</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Tools &amp; platforms</div>
+      <div class="tag-cloud">
+        <span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">AWS</span><span class="tag">Postman</span><span class="tag">Swagger</span><span class="tag">Git</span><span class="tag">Jira</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="experience" class="fade-section">
+  <div class="sec-head"><span class="sec-num">02.</span><h2>Experience</h2><div class="line"></div><div class="count">3 roles · 3 yrs</div></div>
+  <div class="exp-list">
+    <div class="exp-line"></div>
+    <div class="exp-item">
+      <div class="exp-dot active"></div>
+      <div class="exp-card">
+        <div class="exp-header"><span class="exp-role">Software Engineer</span><span class="exp-date">Apr 2025 – Present</span></div>
+        <div class="exp-company">PayMedia · Colombo, Sri Lanka</div>
+        <ul class="exp-bullets">
+          <li>Leading backend for live fintech products with core banking &amp; payment API integrations</li>
+          <li>Designed secure RESTful APIs for real-time transactions &amp; fund transfers</li>
+          <li>Mentored 10+ junior developers, improved code review turnaround &amp; reduced recurring bugs</li>
+          <li>Configured Nginx for reverse proxy, load balancing &amp; SSL/TLS across UAT &amp; production</li>
+          <li>Drove architectural decisions ensuring 90–100% on-time delivery of critical releases</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header"><span class="exp-role">Associate Software Engineer</span><span class="exp-date">May 2023 – Apr 2025</span></div>
+        <div class="exp-company">PayMedia · Colombo, Sri Lanka</div>
+        <ul class="exp-bullets">
+          <li>Integrated DirectPay IPG for secure card onboarding &amp; tokenization</li>
+          <li>Implemented Biller Switch API for real-time bill payments via bank accounts &amp; stored cards</li>
+          <li>Deployed Spring Boot apps across cloud and on-prem multi-tier architectures</li>
+          <li>Built &amp; maintained backend services for digital payment products across multiple core banking systems</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-card">
+        <div class="exp-header"><span class="exp-role">Software Engineer Intern</span><span class="exp-date">Nov 2022 – Apr 2023</span></div>
+        <div class="exp-company">PayMedia · Colombo, Sri Lanka</div>
+        <ul class="exp-bullets">
+          <li>Built RESTful services &amp; micro-features for financial applications using Java &amp; Spring Boot</li>
+          <li>Collaborated with senior engineers to debug production issues &amp; improve performance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="education" class="fade-section">
+  <div class="sec-head"><span class="sec-num">03.</span><h2>Education</h2><div class="line"></div><div class="count">2 qualifications</div></div>
+  <div class="edu-list">
+    <div class="edu-line"></div>
+    <div class="edu-item">
+      <div class="edu-dot recent"></div>
+      <div class="edu-card">
+        <div class="edu-header">
+          <span class="edu-degree">B.Sc. (Hons) in Software Engineering (Top-Up)</span>
+          <span class="edu-date">2024 – 2025</span>
+        </div>
+        <div class="edu-school">Cardiff Metropolitan University</div>
+        <div class="edu-meta">
+          <span class="edu-badge grade">2.2 — Second Class Lower</span>
+          <span class="edu-badge">Top-Up Degree</span>
+          <span class="edu-badge">UK Accredited</span>
+        </div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-dot"></div>
+      <div class="edu-card">
+        <div class="edu-header">
+          <span class="edu-degree">Graduate Diploma in Software Engineering (GDSE)</span>
+          <span class="edu-date">2021 – 2023</span>
+        </div>
+        <div class="edu-school">Institute of Software Engineering (IJSE) · Sri Lanka</div>
+        <div class="edu-meta">
+          <span class="edu-badge grade">Graduate Diploma</span>
+          <span class="edu-badge">Full Stack</span>
+          <span class="edu-badge">Software Engineering</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="projects" class="fade-section">
+  <div class="sec-head"><span class="sec-num">04.</span><h2>Projects</h2><div class="line"></div><div class="count">3 projects</div></div>
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <div class="proj-lang"><span class="proj-lang-dot" style="background:#00d4ff;box-shadow:0 0 4px rgba(0,212,255,0.5)"></span>Next.js</div>
+      </div>
+      <div class="proj-name">De Silva Auto Tech</div>
+      <div class="proj-desc">Freelance — a bilingual business website for an automotive service company. Clean, fast, and fully deployed on Vercel.</div>
+      <div class="proj-tags"><span class="proj-tag">Next.js</span><span class="proj-tag">Vercel</span><span class="proj-tag">Freelance</span></div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <a href="https://www.desilvaautotech.com/en" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--green);text-decoration:none;border:1px solid rgba(63,185,80,0.3);padding:3px 9px;border-radius:3px;transition:all .2s" onmouseover="this.style.background='rgba(63,185,80,0.08)'" onmouseout="this.style.background='transparent'">live site ↗</a>
+        <a href="https://github.com/HelithaSri/de-silva-auto-tech" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--text3);text-decoration:none;border:1px solid var(--border);padding:3px 9px;border-radius:3px;transition:all .2s" onmouseover="this.style.color='var(--green)';this.style.borderColor='rgba(63,185,80,0.3)'" onmouseout="this.style.color='var(--text3)';this.style.borderColor='var(--border)'">github ↗</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M2 10h20"/><circle cx="7" cy="6.5" r="1" fill="currentColor"/></svg></div>
+        <div class="proj-lang"><span class="proj-lang-dot" style="background:#54c5f8;box-shadow:0 0 4px rgba(84,197,248,0.5)"></span>Flutter</div>
+      </div>
+      <div class="proj-name">GhostLayer</div>
+      <div class="proj-desc">A lightweight macOS overlay that stays hidden during screen sharing &amp; recording. Features sticky notes, images, grids, and privacy mode. Built fully with vibe coding via Cursor.</div>
+      <div class="proj-tags"><span class="proj-tag">Flutter</span><span class="proj-tag">Swift</span><span class="proj-tag">macOS</span><span class="proj-tag">Vibe coded</span></div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <a href="https://github.com/HelithaSri/GhostLayer" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--green);text-decoration:none;border:1px solid rgba(63,185,80,0.3);padding:3px 9px;border-radius:3px;transition:all .2s" onmouseover="this.style.background='rgba(63,185,80,0.08)'" onmouseout="this.style.background='transparent'">github ↗</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div class="proj-lang"><span class="proj-lang-dot" style="background:#3776ab;box-shadow:0 0 4px rgba(55,118,171,0.5)"></span>Python</div>
+      </div>
+      <div class="proj-name">Gem Price Prediction</div>
+      <div class="proj-desc">Final year project — an ML system that predicts gemstone prices using scikit-learn models, with a Flask API backend and React frontend for real-time predictions.</div>
+      <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">scikit-learn</span><span class="proj-tag">Flask</span><span class="proj-tag">React</span></div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <a href="https://github.com/HelithaSri/Gem-Price-Prediction-System" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--green);text-decoration:none;border:1px solid rgba(63,185,80,0.3);padding:3px 9px;border-radius:3px;transition:all .2s" onmouseover="this.style.background='rgba(63,185,80,0.08)'" onmouseout="this.style.background='transparent'">github ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact" class="fade-section">
+  <div class="sec-head"><span class="sec-num">05.</span><h2>Contact</h2><div class="line"></div></div>
+  <div class="contact-intro">
+    <h3>Let&#39;s build something <span>great</span> together.</h3>
+    <p>Open to full-time backend roles and freelance projects. I&#39;m most excited about fintech, payments infrastructure, and systems that need to be both fast and correct.</p>
+  </div>
+  <div class="contact-grid">
+    <a class="contact-item" href="/cdn-cgi/l/email-protection#6b030e07021f030a451b190a1d02052b0c060a020745080406">
+      <div class="contact-item-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div><div class="contact-item-label">// email</div><div class="contact-item-val"><span class="__cf_email__" data-cfemail="b0d8d5dcd9c4d8d19ec0c2d1c6d9def0d7ddd1d9dc9ed3dfdd">[email&#160;protected]</span></div></div>
+    </a>
+    <a class="contact-item" href="https://wa.me/94767059199" target="_blank">
+      <div class="contact-item-icon filled">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.862L.054 23.454a.5.5 0 0 0 .598.598l5.538-1.534A11.96 11.96 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.96 9.96 0 0 1-5.031-1.356l-.361-.214-3.741.982.998-3.648-.235-.374A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      </div>
+      <div><div class="contact-item-label">// whatsapp</div><div class="contact-item-val">+94 767 059 199</div></div>
+    </a>
+    <a class="contact-item" href="tel:+94767059199">
+      <div class="contact-item-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div><div class="contact-item-label">// phone</div><div class="contact-item-val">+94 767 059 199</div></div>
+    </a>
+    <a class="contact-item" href="https://linkedin.com/in/helithasri" target="_blank">
+      <div class="contact-item-icon">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </div>
+      <div><div class="contact-item-label">// linkedin</div><div class="contact-item-val">linkedin.com/in/helithasri</div></div>
+    </a>
+    <a class="contact-item" href="https://github.com/HelithaSri" target="_blank">
+      <div class="contact-item-icon filled">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      </div>
+      <div><div class="contact-item-label">// github</div><div class="contact-item-val">github.com/HelithaSri</div></div>
+    </a>
+  </div>
+</section>
+
+<div class="footer">built with <span>&#9829;</span> by helitha praveen &nbsp;·&nbsp; open to work</div>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const lines = [
+  {type:'cmd', prompt:'helitha@portfolio:~$', text:' whoami'},
+  {type:'out', cls:'green', text:'Helitha Praveen'},
+  {type:'out', cls:'dim', text:'Backend Software Engineer · Sri Lanka'},
+  {type:'blank'},
+  {type:'cmd', prompt:'helitha@portfolio:~$', text:' cat expertise.txt'},
+  {type:'out', cls:'', text:'> Java & Spring Boot  ·  3+ years'},
+  {type:'out', cls:'', text:'> Fintech & Core Banking APIs'},
+  {type:'out', cls:'', text:'> Scalable Microservices & REST'},
+  {type:'out', cls:'', text:'> Nginx · Docker · Linux · AWS'},
+  {type:'blank'},
+  {type:'cmd', prompt:'helitha@portfolio:~$', text:' cat status.txt'},
+  {type:'out', cls:'green', text:'[ OPEN TO WORK ]  full-time & freelance'},
+  {type:'cursor'},
+];
+const term = document.getElementById('term');
+let idx = 0;
+function addLine(line) {
+  if (line.type === 'blank') {
+    const d = document.createElement('div'); d.className = 't-blank';
+    term.appendChild(d); next(); return;
+  }
+  if (line.type === 'cursor') {
+    const d = document.createElement('div'); d.className = 't-line';
+    d.innerHTML = '<span class="prompt">helitha@portfolio:~$</span> <span class="cursor"></span>';
+    term.appendChild(d); setTimeout(() => d.classList.add('show'), 30); return;
+  }
+  const d = document.createElement('div'); d.className = 't-line';
+  if (line.type === 'cmd') {
+    d.innerHTML = '<span class="prompt">' + line.prompt + '</span><span class="t-cmd"></span>';
+    term.appendChild(d); setTimeout(() => d.classList.add('show'), 30);
+    typeText(d.querySelector('.t-cmd'), line.text, 40, next);
+  } else {
+    d.innerHTML = '<span class="t-output ' + (line.cls||'') + '">' + line.text + '</span>';
+    term.appendChild(d); setTimeout(() => d.classList.add('show'), 30);
+    setTimeout(next, 100);
+  }
+}
+function typeText(el, text, speed, cb) {
+  let j = 0;
+  const iv = setInterval(() => {
+    el.textContent += text[j++];
+    if (j >= text.length) { clearInterval(iv); setTimeout(cb, 200); }
+  }, speed);
+}
+function next() { if (idx < lines.length) addLine(lines[idx++]); }
+setTimeout(next, 500);
+
+const fadeEls = document.querySelectorAll('.fade-section');
+if ('IntersectionObserver' in window) {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });}, { threshold: 0, rootMargin: '0px 0px -20px 0px' });
+  fadeEls.forEach(el => obs.observe(el));
+} else {
+  fadeEls.forEach(el => el.classList.add('visible'));
+}
+setTimeout(() => fadeEls.forEach(el => el.classList.add('visible')), 900);
+</script>
+</body>
+</html>
