@@ -12,7 +12,7 @@ type Line =
 
 const lines: Line[] = [
     { type: 'cmd', prompt: 'helitha@portfolio:~$', text: ' whoami' },
-    { type: 'out', cls: 'green', text: 'Helitha Praveen' },
+    { type: 'out', cls: 'green', text: 'Helitha Praveen · AKA HelithaSri' },
     { type: 'out', cls: 'dim', text: 'Backend Software Engineer · Sri Lanka' },
     { type: 'blank' },
     { type: 'cmd', prompt: 'helitha@portfolio:~$', text: ' cat expertise.txt' },

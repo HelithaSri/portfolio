@@ -1,25 +1,56 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import JsonLd from '@/components/ui/JsonLd';
 
 export const metadata: Metadata = {
-  title: 'Helitha Praveen — Backend Software Engineer',
+  metadataBase: new URL('https://www.helithasri.dev'),
+  title: 'Helitha Praveen — Backend Software Engineer | Java · Spring Boot · Fintech',
   description:
-    'Backend Software Engineer specializing in Java, Spring Boot, Fintech APIs, and Microservices. Based in Colombo, Sri Lanka — remote-ready.',
+    'Helitha Praveen is a backend software engineer based in Colombo, Sri Lanka with 3+ years building fintech and payment systems using Java, Spring Boot, and REST APIs. Open to full-time and freelance opportunities.',
   keywords: [
-    'Helitha Praveen',
-    'Backend Engineer',
-    'Java',
+    'backend software engineer',
+    'Java developer',
     'Spring Boot',
-    'Fintech',
-    'Microservices',
+    'REST API',
+    'fintech',
+    'payment systems',
+    'Colombo',
     'Sri Lanka',
+    'remote developer',
+    'Helitha Praveen',
+    'Microservices',
   ],
   authors: [{ name: 'Helitha Praveen' }],
+  verification: {
+    google: '_bfioFZ1vgE1nFROvfyzLOJ5ZGJMqMteddMrMGxzdso',
+  },
+  robots: { index: true, follow: true },
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
+    type: 'website',
+    url: 'https://www.helithasri.dev/',
     title: 'Helitha Praveen — Backend Software Engineer',
     description:
-      'Backend Software Engineer specializing in Java, Spring Boot, Fintech APIs & Microservices.',
-    type: 'website',
+      'Backend engineer with 3+ years in fintech and payment systems. Java, Spring Boot, REST APIs, Microservices. Based in Colombo, Sri Lanka. Open to full-time and freelance roles.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Helitha Praveen — Backend Software Engineer',
+      },
+    ],
+    siteName: 'Helitha Praveen Portfolio',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Helitha Praveen — Backend Software Engineer',
+    description:
+      'Backend engineer with 3+ years in fintech and payment systems. Java, Spring Boot, REST APIs. Open to full-time and freelance roles.',
+    images: ['/og-image.png'],
   },
   icons: {
     icon: '/hp_logo.svg',
@@ -34,7 +65,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <JsonLd />
+        {children}
+      </body>
     </html>
   );
 }
