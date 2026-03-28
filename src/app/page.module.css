@@ -7,17 +7,3 @@
 .hero {
   padding: 48px 0 16px;
 }
-
-.bgLogo {
-  position: fixed;
-  /* ← must be fixed, not absolute */
-  bottom: -80px;
-  right: -80px;
-  width: 400px;
-  height: 400px;
-  opacity: 0.06;
-  filter: blur(8px);
-  pointer-events: none;
-  z-index: 0;
-  user-select: none;
-}

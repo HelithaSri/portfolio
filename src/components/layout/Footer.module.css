@@ -9,3 +9,13 @@
 .heart {
     color: var(--green);
 }
+
+.privacyLink {
+    color: var(--text3);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.privacyLink:hover {
+    color: var(--green);
+}
