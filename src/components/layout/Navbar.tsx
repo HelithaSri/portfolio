@@ -16,7 +16,7 @@ export default function Navbar() {
             <span className={styles.logoIcon}>
                 <Image
                     src="/hp_logo_nobg.svg"
-                    alt="Logo"
+                    alt="Helitha Praveen logo"
                     width={24}
                     height={24}
                 />
