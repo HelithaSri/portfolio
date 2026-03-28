@@ -18,6 +18,7 @@ export default function Home() {
       <main className={styles.shell}>
         {/* Hero / About */}
         <section id="about" className={styles.hero}>
+          <h1 className="sr-only">Helitha Praveen — Backend Software Engineer</h1>
           <HeroTerminal />
           <Stats />
           <HeroButtons />
