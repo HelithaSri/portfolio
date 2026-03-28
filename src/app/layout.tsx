@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import JsonLd from '@/components/ui/JsonLd';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.helithasri.dev'),
@@ -68,6 +69,9 @@ export default function RootLayout({
       <body>
         <JsonLd />
         {children}
+        {process.env.NODE_ENV === 'production' && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+        )}
       </body>
     </html>
   );
