@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   alternates: {
-    canonical: '/',
+    canonical: 'https://www.helithasri.dev/',
   },
   openGraph: {
     type: 'website',
@@ -54,8 +54,11 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
   },
   icons: {
-    icon: '/hp_logo.svg',
-    apple: '/hp_logo.svg',
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-touch-icon.png',
   },
 };
 
