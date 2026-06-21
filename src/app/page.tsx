@@ -9,6 +9,7 @@ import Skills from '@/components/sections/Skills';
 import Experience from '@/components/sections/Experience';
 import Education from '@/components/sections/Education';
 import Projects from '@/components/sections/Projects';
+import Recommendations from '@/components/sections/Recommendations';
 import Contact from '@/components/sections/Contact';
 
 export default function Home() {
@@ -35,6 +36,9 @@ export default function Home() {
 
         <Divider />
         <Projects />
+
+        <Divider />
+        <Recommendations />
 
         <Divider />
         <Contact />

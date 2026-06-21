@@ -1,0 +1,227 @@
+.fadeSection {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.fadeSection.visible {
+    opacity: 1;
+    transform: none;
+}
+
+.intro {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.eyebrow {
+    color: var(--green);
+    font-family: var(--mono);
+    font-size: 11px;
+    margin-bottom: 7px;
+}
+
+.headline {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin-bottom: 8px;
+}
+
+.headline span {
+    color: var(--green);
+}
+
+.subtitle {
+    color: var(--text2);
+    font-size: 13px;
+}
+
+.linkedinLink {
+    border: 1px solid rgba(63, 185, 80, 0.3);
+    border-radius: 4px;
+    color: var(--green);
+    flex-shrink: 0;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 6px 10px;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.linkedinLink:hover {
+    background: rgba(63, 185, 80, 0.08);
+    border-color: var(--green);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+    overflow: hidden;
+    padding: 20px;
+    position: relative;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.card::before {
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    content: '';
+    height: 2px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover {
+    border-color: var(--green3);
+    box-shadow: 0 0 28px rgba(63, 185, 80, 0.1);
+    transform: translateY(-2px);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+}
+
+.quoteMark {
+    color: var(--green);
+    font-family: Georgia, serif;
+    font-size: 46px;
+    height: 34px;
+    line-height: 1;
+    opacity: 0.75;
+}
+
+.quote {
+    color: var(--text2);
+    display: -webkit-box;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}
+
+.quote.expanded {
+    display: block;
+    overflow: visible;
+}
+
+.toggle {
+    align-self: flex-start;
+    background: transparent;
+    border: 0;
+    color: var(--green);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 10px;
+    margin: 10px 0 18px;
+    padding: 0;
+}
+
+.toggle:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.author {
+    align-items: center;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 11px;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.avatar {
+    align-items: center;
+    background: rgba(63, 185, 80, 0.08);
+    border: 1px solid rgba(63, 185, 80, 0.25);
+    border-radius: 8px;
+    color: var(--green);
+    display: flex;
+    flex: 0 0 38px;
+    font-family: var(--mono);
+    font-size: 11px;
+    height: 38px;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.authorInfo {
+    min-width: 0;
+}
+
+.name {
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.relationship {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.role {
+    color: var(--text2);
+    display: -webkit-box;
+    font-size: 10px;
+    line-height: 1.35;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.relationship {
+    color: var(--text3);
+    font-family: var(--mono);
+    font-size: 9px;
+    margin-top: 2px;
+}
+
+@media (max-width: 680px) {
+    .intro {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .headline {
+        font-size: 21px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        min-height: 0;
+    }
+
+    .card:last-child:nth-child(odd) {
+        grid-column: auto;
+    }
+}
