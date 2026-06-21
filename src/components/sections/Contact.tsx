@@ -101,7 +101,7 @@ export default function Contact() {
 
     return (
         <section id="contact" className={styles.fadeSection} ref={ref}>
-            <SectionHeader num="05." title="Contact" />
+            <SectionHeader num="06." title="Contact" />
 
             <div className={styles.contactCallout}>
                 <h3 className={styles.contactHeadline}>
